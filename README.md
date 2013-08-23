@@ -76,7 +76,7 @@ out as part of the footer is output.
   For more information, check out the WordPress Codex entry for home_url at http://codex.wordpress.org/Function_Reference/home_url .
 
 
-## To-Do ## 
+## To-Do ##
 
 * Write two short functions plus an admin page that allow for the specification of a header and footer URL. Those functions should then consume the 
   contents of those URLs, store them locally via the Transients API, and output them where the two functions are called. This will turn the plug-in 

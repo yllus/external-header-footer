@@ -1,4 +1,4 @@
-# External Header Footer (WordPress 3 Plug-In) #
+# External Header Footer #
 
 **External Header Footer** is a simple WordPress plug-in that exposes that site's header and footer over HTTP as URLs whose content can then be consumed. 
 
@@ -33,7 +33,7 @@ Sometimes the contents of your header or footer will cause conflicts or problems
 **Google Analytics for WordPress** plug-in on your WordPress site, but your external website has its own Google Analytics code, and you don't want to get 
 the two mixed together. No problem - but it will take a little bit of code. 
 
-Two new WordPress Actions are included as part of this plug-ins; both allow you to run your own code immediately before the external header and footer 
+Two new WordPress Actions are included as part of this plug-in; both allow you to run your own code immediately before the external header and footer 
 are displayed at their new individual URLs:
 
 	external_header_footer_pre_header
@@ -74,3 +74,10 @@ out as part of the footer is output.
   		<a href="<?php home_url('/about-us/'); ?>">About Us</a>
 
   For more information, check out the WordPress Codex entry for home_url at http://codex.wordpress.org/Function_Reference/home_url .
+
+
+## To-Do ## 
+
+* Write two short functions plus an admin page that allow for the specification of a header and footer URL. Those functions should then consume the 
+  contents of those URLs, store them locally via the Transients API, and output them where the two functions are called. This will turn the plug-in 
+  into a two-way street, useful for both provision and consumption of site header/footer styling.

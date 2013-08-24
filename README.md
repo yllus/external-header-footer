@@ -65,8 +65,8 @@ the two mixed together. No problem - but it will take a little bit of code.
 Two new WordPress Actions are included as part of this plug-in; both allow you to run your own code immediately before the external header and footer 
 are displayed at their new individual URLs:
 
-  external_header_footer_pre_header
-  external_header_footer_pre_footer
+      external_header_footer_pre_header
+      external_header_footer_pre_footer
 
 Let's say you need to stop **Google Analytics for WordPress** from  In your theme's functions.php file, write a function that removes the addition of 
 JavaScript code for Google Analytics by removing the action that adds to your site's header. Then simply call hook your function to the

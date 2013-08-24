@@ -72,16 +72,16 @@ Let's say you need to stop **Google Analytics for WordPress** from  In your them
 JavaScript code for Google Analytics by removing the action that adds to your site's header. Then simply call hook your function to the
 **external_header_footer_pre_header** action. Here's an example of that code:
 
-  function remove_ga_from_external_header() {
-    // Remove the addition of AdSense JavaScript code from the header.
-    remove_action( 'wp_head', array( 'GA_Filter', 'spool_adsense' ), 1 );
-
-    // Remove the addition of Google Analytics JavaScript code from the header.
-    remove_action( 'wp_head', array( 'GA_Filter', 'spool_analytics' ), 2 );
-  }
-
-  // Call the function remove_ga_from_external_header() immediately before the external header is displayed (at its individual URL).
-  add_action('external_header_footer_pre_header', 'remove_ga_from_external_header');
+     function remove_ga_from_external_header() {
+       // Remove the addition of AdSense JavaScript code from the header.
+       remove_action( 'wp_head', array( 'GA_Filter', 'spool_adsense' ), 1 );
+   
+       // Remove the addition of Google Analytics JavaScript code from the header.
+       remove_action( 'wp_head', array( 'GA_Filter', 'spool_analytics' ), 2 );
+     }
+   
+     // Call the function remove_ga_from_external_header() immediately before the external header is displayed (at its individual URL).
+     add_action('external_header_footer_pre_header', 'remove_ga_from_external_header');
 
 Use the **external_header_footer_pre_footer** and the same technique - use of remove_action or remove_filter - to ensure only the code you want to go 
 out as part of the footer is output.
@@ -96,11 +96,11 @@ out as part of the footer is output.
 * Ensure that the URLs in your header and footer are absolute to ensure that they point to pages that exist when they're being displayed on an external 
   website. For example, if you've got the following URL coded into your header to point to your "About Us" page:
 
-    <a href="/about-us/">About Us</a>
+         <a href="/about-us/">About Us</a>
 
   You can use the standard WordPress function home_url() to ensure that the URL is output in absolute form:
 
-    <a href="<?php home_url('/about-us/'); ?>">About Us</a>
+         <a href="<?php home_url('/about-us/'); ?>">About Us</a>
 
   For more information, check out the WordPress Codex entry for home_url at http://codex.wordpress.org/Function_Reference/home_url .
 

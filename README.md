@@ -21,12 +21,12 @@ be assured that both sites will maintain a consistent look and feel.
 3. Check the **Expose Header and Footer** checkbox and click the **Save Changes** button.
 
 4. The settings page should return with a message indicating your changes have been saved. The page will also list three URLs that are now ready for 
-   viewing and use. The test page provides a demonstration of what some sample content will look like when the header and footer are read in and then 
-   displayed at the top and bottom of that page - check out the (very straightforward) source code of test-page.php to understand how to use this 
-   plug-in on your external websites.
+   viewing and use. The **Demo Page URL** provides a demonstration of what some sample content will look like when the header and footer are read in and 
+   then displayed at the top and bottom of that page - check out the (very straightforward) source code of test-page.php to understand how to use this 
+   plug-in on your external website(s).
 
-5. On the WordPress side of things, your work is done. To finish up, set up your external website(s) to retrieve the header and footer at the URLs listed 
-   above, sandwiching the actual content of the site in between. 
+5. On the WordPress side of things, your work is done. To finish up, set up your external website(s) to retrieve from **Header URL** and **Footer URL**, 
+   sandwiching the actual content of the site in between them. 
 
 ### Consuming an External Header and Footer to display on your WordPress Site ###
 

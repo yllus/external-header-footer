@@ -12,9 +12,17 @@ be assured that both sites will maintain a consistent look and feel.
 
 ## Setup & Use ##
 
+### Making Your Website's Header and Footer Available for Consumption ##
+
 1. Enable **External Header Footer** within the **Plugins** > **Installed Plugins** interface.
 
-2. Immediately, three pages should now be available for viewing and use:
+2. Head over next to the settings page for the plug-in at **Settings** > **External Header Footer**.
+
+3. Check the **Expose Header and Footer** checkbox and click the **Save Changes** button.
+
+4. The settings page should return with a message indicating your changes have been saved. The page will also list three URLs that are now ready for 
+   viewing and use; they'll look something like this:
+
    * Header: http://yourdomain.com/wp-content/plugins/external-header-footer/header.php
    * Footer: http://yourdomain.com/wp-content/plugins/external-header-footer/header.php
    * Test Page: http://yourdomain.com/wp-content/plugins/external-header-footer/test-page.php
@@ -23,8 +31,35 @@ be assured that both sites will maintain a consistent look and feel.
    and bottom of that page - check out the (very straightforward) source code of test-page.php to understand how to use this plug-in on your external 
    websites.
 
-3. On the WordPress side of things, your work is done. To finish up, set up your external website to retrieve the header and footer at the URLs listed 
+4. On the WordPress side of things, your work is done. To finish up, set up your external website(s) to retrieve the header and footer at the URLs listed 
    above, sandwiching the actual content of the site in between. 
+
+### Consuming an External Header and Footer to display on your WordPress Site ###
+
+1. If not already done, enable **External Header Footer** within the **Plugins** > **Installed Plugins** interface.
+
+2. Head over next to the settings page for the plug-in at **Settings** > **External Header Footer**.
+
+3. Enter a valid URL into the **External Header URL** and **External Footer URL** fields (or leave one or the other blank if you only need one of the two).
+
+4. Verify that the **Cache Header/Footer For** setting contains an appopriate value that is denominated in minutes.
+
+5. Click the **Save Changes** button.
+
+6. The settings page should return with a message indicating your changes have been saved. Next, click on the URL for the **External Demo Page URL** to 
+   see a demonstration of what a page wrapped with the specified external header and footer would appear like.
+
+7. To display the external header on a page, simply call the following function:
+
+      ehf_output_external_header();
+
+   Similarly, call the following function to output the external footer to a page:
+
+      ehf_output_external_footer();
+
+   Note: Through use of the best caching system available on your WordPress site, the HTML markup for the header and footer will be saved to your local 
+   WordPress website, and only re-retreived when the cache expiry value is reached. Of course, any CSS, JavaScript or image assets on the external site 
+   will be retrieved from that site by your site visitors.
 
 
 ## Advanced Usage ##
@@ -71,9 +106,12 @@ out as part of the footer is output.
 
   You can use the standard WordPress function home_url() to ensure that the URL is output in absolute form:
 
-  		<a href="<?php home_url('/about-us/'); ?>">About Us</a>
+  	<a href="<?php home_url('/about-us/'); ?>">About Us</a>
 
   For more information, check out the WordPress Codex entry for home_url at http://codex.wordpress.org/Function_Reference/home_url .
+
+* Clicking the **Save Changes** button on the settings page for this plug-in will clear your local cache of the external header or footer that's been 
+  saved, so do that if you want to refresh the cache immediately. 
 
 
 ## To-Do ##

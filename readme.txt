@@ -1,4 +1,16 @@
-# External Header Footer #
+=== External Header Footer ===
+Contributors: yllus
+Donate link: https://github.com/yllus/external-header-footer
+Tags: 
+Requires at least: 3.5.2
+Tested up to: 3.9.2
+Stable tag: trunk
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+External Header Footer lets you expose your site's header and footer as URLs whose content can then be displayed on other websites. 
+
+== Description ==
 
 **External Header Footer** is a simple WordPress plug-in that exposes that site's header and footer over HTTP as URLs whose content can then be consumed. 
 
@@ -9,10 +21,7 @@ That's the cue to use **External Header Footer**: Once this plug-in is enabled o
 and locally store (write to a file, or to memory) the header and footer to be displayed on that site every day/hour/week. Now with minimal effort you can 
 be assured that both sites will maintain a consistent look and feel.
 
-
-## Setup & Use ##
-
-### Making Your Website's Header and Footer Available for Consumption ##
+== Installation ==
 
 1. Enable **External Header Footer** within the **Plugins** > **Installed Plugins** interface.
 
@@ -28,7 +37,9 @@ be assured that both sites will maintain a consistent look and feel.
 5. On the WordPress side of things, your work is done. To finish up, set up your external website(s) to retrieve from **Header URL** and **Footer URL**, 
    sandwiching the actual content of the site in between them. 
 
-### Consuming an External Header and Footer to display on your WordPress Site ###
+== Frequently Asked Questions ==
+
+= Consuming an External Header and Footer to display on your WordPress Site =
 
 1. If not already done, enable **External Header Footer** within the **Plugins** > **Installed Plugins** interface.
 
@@ -55,8 +66,7 @@ be assured that both sites will maintain a consistent look and feel.
    WordPress website, and only re-retreived when the cache expiry value is reached. Of course, any CSS, JavaScript or image assets on the external site 
    will be retrieved from that site by your site visitors.
 
-
-## Advanced Usage ##
+= Advanced Usage =
 
 Sometimes the contents of your header or footer will cause conflicts or problems if displayed on an external website: Let's say you're using the popular 
 **Google Analytics for WordPress** plug-in on your WordPress site, but your external website has its own Google Analytics code, and you don't want to get 
@@ -86,8 +96,7 @@ JavaScript code for Google Analytics by removing the action that adds to your si
 Use the **external_header_footer_pre_footer** and the same technique - use of remove_action or remove_filter - to ensure only the code you want to go 
 out as part of the footer is output.
 
-
-## Tips & Tricks ##
+= Tips & Tricks =
 
 * Avoid having the header and footer retrieved every time your external website displays a page. Instead, see if you can schedule a task to retrieve the 
   header and footer occasionally (say, once an hour) and save it to the external website's diskspace. Then output the contents of those files when pages 
@@ -106,3 +115,24 @@ out as part of the footer is output.
 
 * Need to clear the cache of an external header/footer immediately? No problem - clicking the **Save Changes** button on the settings page for this plug-in 
   do exactly that.
+
+== Screenshots ==
+
+1. The settings page for External Header Footer allows you to enable/disable whether or not your WordPress website's header and footer will be available 
+   for external consumption (**Expose Header and Footer**). If that option is checked, the **Header URL** and **Footer URL** fields display the URLs that 
+   should be retrieved by external websites when using your site's header and footer.
+
+   Within the **Consume Header / Footer from External Website** section, you can optionally consume another site's header and footer, and then use the 
+   provided PHP functions to output them to your WordPress site's pages.
+
+2. This displays what's found at the **Demo Page URL**; namely, some placeholder text wrapped by your site's header and footer.
+
+== Changelog ==
+
+= 1.0 =
+* Initial release; tested compatibility with WordPress v3.9.2.
+
+== Upgrade Notice ==
+
+= 1.0 =
+* Initial release.

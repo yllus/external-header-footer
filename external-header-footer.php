@@ -152,13 +152,11 @@ function ehf_expose_header_and_footer_checkbox() {
 	<tr valign="top">
 		<th scope="row">Expose Header and Footer</th>
 		<td> 
-			<fieldset>
-				<legend class="screen-reader-text"><span>Expose Header and Footer</span></legend>
-				<label for="ehf_expose_header_and_footer">
-					<input name="ehf_expose_header_and_footer" type="checkbox" id="ehf_expose_header_and_footer" value="1" <?php echo $ehf_expose_header_and_footer_checked; ?>/> 
-					This site's header and footer can be consumed by other websites (if unchecked, the URLs below return blank data)
-				</label>
-			</fieldset>
+			<legend class="screen-reader-text"><span>Expose Header and Footer</span></legend>
+			<label for="ehf_expose_header_and_footer">
+				<input name="ehf_expose_header_and_footer" type="checkbox" id="ehf_expose_header_and_footer" value="1" <?php echo $ehf_expose_header_and_footer_checked; ?>/> 
+				Allow this site's header and footer can be consumed by other websites
+			</label>
 		</td>
 	</tr>
 
@@ -168,7 +166,7 @@ function ehf_expose_header_and_footer_checkbox() {
 		</th>
 		<td>
 			<code><a target="_blank" href="<?php echo $ehf_header_url; ?>"><?php echo $ehf_header_url; ?></a></code>
-			<p class="description">Remember, you can modify the output of this URL through use of the <code>external_header_footer_pre_header()</code> action.
+			<p class="description">Provide this URL to those looking to display this site's header on another website. (Remember, you can modify the output of the URL above through use of the <code>external_header_footer_pre_header()</code> action.)
 		</td>
 	</tr>
 
@@ -178,7 +176,7 @@ function ehf_expose_header_and_footer_checkbox() {
 		</th>
 		<td>
 			<code><a target="_blank" href="<?php echo $ehf_footer_url; ?>"><?php echo $ehf_footer_url; ?></a></code>
-			<p class="description">Remember, you can modify the output of this URL through use of the <code>external_header_footer_pre_footer()</code> action.
+			<p class="description">Provide this URL to those looking to display this site's footer on another website. (Remember, you can modify the output of the URL above through use of the <code>external_header_footer_pre_footer()</code> action.)
 		</td>
 	</tr>
 
@@ -188,7 +186,7 @@ function ehf_expose_header_and_footer_checkbox() {
 		</th>
 		<td>
 			<code><a target="_blank" href="<?php echo $ehf_test_url; ?>"><?php echo $ehf_test_url; ?></a></code>
-			<p class="description">This page demonstrates what an external page wrapped with your header and footer would look like.</p>
+			<p class="description">This page acts as a demonstration of what a page on this website would look like wrapped with an external site's header and footer.</p>
 		</td>
 	</tr>
 	<?php
@@ -205,13 +203,11 @@ function ehf_consume_header_and_footer_checkbox() {
 	<tr valign="top">
 		<th scope="row">Consume External Header / Footer</th>
 		<td> 
-			<fieldset>
-				<legend class="screen-reader-text"><span>Consume Header and Footer</span></legend>
-				<label for="ehf_consume_header_and_footer">
-					<input name="ehf_consume_header_and_footer" type="checkbox" id="ehf_consume_header_and_footer" value="1" <?php echo $ehf_consume_header_and_footer_checked; ?>/> 
-					If checked, the <code>ehf_output_external_header()</code> and <code>ehf_output_external_footer()</code> functions will output the contents of the header and footer URLs listed below
-				</label>
-			</fieldset>
+			<legend class="screen-reader-text"><span>Consume Header and Footer</span></legend>
+			<label for="ehf_consume_header_and_footer">
+				<input name="ehf_consume_header_and_footer" type="checkbox" id="ehf_consume_header_and_footer" value="1" <?php echo $ehf_consume_header_and_footer_checked; ?>/> 
+				If checked, the <code>ehf_output_external_header()</code> and <code>ehf_output_external_footer()</code> functions will output the contents of the header and footer URLs listed below
+			</label>
 		</td>
 	</tr>
 	<?php

@@ -18,7 +18,7 @@ The URL to the site header is: <a target="_blank" href="<?php echo $str_header_u
 <br />
 The URL to the site footer is: <a target="_blank" href="<?php echo $str_footer_url; ?>"><?php echo $str_footer_url; ?></a>
 <br /><br />
-Thanks for using the <b>External Header Footer</b> plug-in! Please write to <a href="mailto:sully.syed@rci.rogers.com">sully.syed@rci.rogers.com</a> if you encounter issues or have suggestions.
+Thanks for using the <b>External Header Footer</b> plug-in! Please write to <a href="mailto:sully@yllus.com">sully@yllus.com</a> if you encounter issues or have suggestions.
 </p>
 
 <?php 

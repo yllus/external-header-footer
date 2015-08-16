@@ -4,7 +4,7 @@
  Plugin URI: https://github.com/yllus/external-header-footer
  Description: Exposes the header and footer of the website as individual files, allowing for external consumption (for third parties sites that want a similar design style).
  Author: Sully Syed
- Version: 1.0
+ Version: 1.0.1
  Author URI: http://yllus.com/
 */
 
@@ -31,16 +31,48 @@ function ehf_parse_request( &$wp ) {
         		// Execute any actions that have been coded into the theme/other plug-ins to run before the footer is output.
 				do_action('external_header_footer_pre_header');
 
-				// Output the header of the website.
-				get_header();
+				// Capture the header of the website to a string.
+				ob_start();
+			    get_header();
+			    $str_output = ob_get_contents();
+			    ob_end_clean();
+
+			    // If we're forcing use of absolute URLs, filter the output of the header through a function.
+				if ( ( (int) get_option('ehf_force_use_of_absolute', 0) ) == 1 ) {
+					$str_output = ehf_do_force_absolute_urls($str_output);
+				}
+
+				// If we're forcing use of HTTPS, filter the output of the header through a function.
+				if ( ( (int) get_option('ehf_force_use_of_https', 0) ) == 1 ) {
+					$str_output = ehf_do_force_https($str_output);
+				}
+
+				// Output the header.
+				echo $str_output;
 				exit;
         		break;
         	case 'footer':
     			// Execute any actions that have been coded into the theme/other plug-ins to run before the footer is output.
 				do_action('external_header_footer_pre_footer');
 
-				// Output the footer of the website.
+				// Capture the footer of the website to a string.
+				ob_start();
 				get_footer(); 
+				$str_output = ob_get_contents();
+			    ob_end_clean();
+
+			    // If we're forcing use of absolute URLs, filter the output of the header through a function.
+				if ( ( (int) get_option('ehf_force_use_of_absolute', 0) ) == 1 ) {
+					$str_output = ehf_do_force_absolute_urls($str_output);
+				}
+
+				// If we're forcing use of HTTPS, filter the output of the footer through a function.
+				if ( ( (int) get_option('ehf_force_use_of_https', 0) ) == 1 ) {
+					$str_output = ehf_do_force_https($str_output);
+				}
+
+				// Output the footer.
+				echo $str_output;
 				exit;
 				break;
 			case 'demo':
@@ -113,6 +145,36 @@ function ehf_output_external_footer() {
 }
 
 /**
+ * Called when we wish to force use of HTTPS on links to the WordPress site domain.
+ *
+ * @param string $str_output The string within which to force relative to root links to be absolute
+ * @return string
+ */
+function ehf_do_force_absolute_urls( $str_output ) {
+	// Get this WordPress website's home URL.
+	$url_home 	= home_url( '/' );
+
+	// Replace SRC and HREF attributes that are absolute to root.
+	$str_output = preg_replace('/(src|href)=(\'|")\//i', '$1=$2' . $url_home, $str_output);
+
+	return $str_output;
+}
+
+/**
+ * Called when we wish to force use of HTTPS on links to the WordPress site domain.
+ *
+ * @param string $str_output The string within which to force links to this WordPress site's domain to HTTPS
+ * @return string
+ */
+function ehf_do_force_https( $str_output ) {
+	// Get this WordPress website's home URL in HTTPS and HTTP.
+	$url_https 	= home_url( '/', 'https' );
+	$url_http 	= home_url( '/', 'http' );
+
+	return str_replace($url_http, $url_https, $str_output);
+}
+
+/**
  * Adds "External Header Footer" under the Settings menu, points the entry to be run by external_header_footer_do_settings_page().
  *
  * @return void
@@ -166,6 +228,16 @@ function external_header_footer_init() {
     // output in the function ehf_expose_header_and_footer_checkbox().
     add_settings_field('ehf_expose_header_and_footer', '', 'ehf_expose_header_and_footer_checkbox', 'external_header_footer_settings_page', 'external_header_footer_settings_section');
     register_setting('external_header_footer_settings_group', 'ehf_expose_header_and_footer', 'ehf_flush_rewrite_rules');
+
+    // Add the "Force Use Of Absolute URLs" field (blank title here, output in its function), registered to the group "external_header_footer_settings_group", and 
+    // output in the function ehf_expose_force_use_of_absolute_urls_checkbox().
+    add_settings_field('ehf_force_use_of_absolute', '', 'ehf_expose_force_use_of_absolute_urls_checkbox', 'external_header_footer_settings_page', 'external_header_footer_settings_section');
+    register_setting('external_header_footer_settings_group', 'ehf_force_use_of_absolute');
+
+    // Add the "Force Use Of HTTPS" field (blank title here, output in its function), registered to the group "external_header_footer_settings_group", and 
+    // output in the function ehf_expose_force_use_of_https_checkbox().
+    add_settings_field('ehf_force_use_of_https', '', 'ehf_expose_force_use_of_https_checkbox', 'external_header_footer_settings_page', 'external_header_footer_settings_section');
+    register_setting('external_header_footer_settings_group', 'ehf_force_use_of_https');
 
     // Add the "External Header URL" field (blank title here, output in its function), registered to the group "external_header_footer_settings_group", output in 
     // the function ext_external_header_url_text() and using the sanitizing function of ehf_external_clear_cache().
@@ -254,6 +326,48 @@ function ehf_expose_header_and_footer_checkbox() {
 		<td>
 			<code><a target="_blank" href="<?php echo $ehf_test_url; ?>"><?php echo $ehf_test_url; ?></a></code>
 			<p class="description">This page acts as a demonstration of what a page on this website would look like wrapped with an external site's header and footer.</p>
+		</td>
+	</tr>
+	<?php
+}
+
+function ehf_expose_force_use_of_https_checkbox() {
+	// Retrieve and expose the "Force Use Of HTTPS" setting.
+	$ehf_force_use_of_https = (int) get_option('ehf_force_use_of_https', 0);
+	$ehf_force_use_of_https_checked = '';
+	if ( $ehf_force_use_of_https == 1 ) {
+		$ehf_force_use_of_https_checked = ' checked="checked"';
+	}
+	?>
+	<tr valign="top">
+		<th scope="row">Force Use Of HTTPS</th>
+		<td> 
+			<legend class="screen-reader-text"><span>Force Use Of HTTPS</span></legend>
+			<label for="ehf_force_use_of_https">
+				<input name="ehf_force_use_of_https" type="checkbox" id="ehf_force_use_of_https" value="1" <?php echo $ehf_force_use_of_https_checked; ?>/> 
+				Force all URLs pointing to your this WordPress site's domain in your header and footer to be automatically rewritten to use HTTPS
+			</label>
+		</td>
+	</tr>
+	<?php
+}
+
+function ehf_expose_force_use_of_absolute_urls_checkbox() {
+	// Retrieve and expose the "Force Use Of Absolute URLs" setting.
+	$ehf_force_use_of_absolute = (int) get_option('ehf_force_use_of_absolute', 0);
+	$ehf_force_use_of_absolute_checked = '';
+	if ( $ehf_force_use_of_absolute == 1 ) {
+		$ehf_force_use_of_absolute_checked = ' checked="checked"';
+	}
+	?>
+	<tr valign="top">
+		<th scope="row">Force Use Of Absolute URLs</th>
+		<td> 
+			<legend class="screen-reader-text"><span>Force Use Of Absolute URLs</span></legend>
+			<label for="ehf_force_use_of_absolute">
+				<input name="ehf_force_use_of_absolute" type="checkbox" id="ehf_force_use_of_absolute" value="1" <?php echo $ehf_force_use_of_absolute_checked; ?>/> 
+				Convert all URLs that are relative to the site root to absolute URLs
+			</label>
 		</td>
 	</tr>
 	<?php

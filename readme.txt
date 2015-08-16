@@ -3,7 +3,7 @@ Contributors: yllus
 Donate link: https://github.com/yllus/external-header-footer
 Tags: 
 Requires at least: 3.5.2
-Tested up to: 3.9.2
+Tested up to: 4.2.4
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -129,10 +129,18 @@ out as part of the footer is output.
 
 == Changelog ==
 
+= 1.0.1 =
+* Adds a "Force Use Of Absolute URLs" option that automatically rewrites URLs that are relative to the site's root to be absolute URLs instead.
+* Adds a "Force Use Of HTTPS" option that automatically rewrites all URLs pointing to your WordPress site's domain in your header and footer to a 
+  HTTPS version of those links instead.
+
 = 1.0 =
 * Initial release; tested compatibility with WordPress v3.9.2.
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+* Adds the "Force Use Of HTTPS" and "Force Use Of Absolute URLs" features, bumps compatibility to v4.2.4.
 
 = 1.0 =
 * Initial release.
